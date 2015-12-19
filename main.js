@@ -26,7 +26,7 @@ var Nav = React.createClass({
 				render: function(){
 					return (
 							<ul>
-								<li className="main" id={this.state.home} onClick={this.goHome}><a href="#">HOME</a></li>
+								<li className="main" id={this.state.home} onClick={this.goHome}><a href="#"><img src="images/menu.png" /></a></li>
 	          					<li className={this.state.view}><a href="#">About Me</a></li>
 									<li className={this.state.view}><a href="#">My Work</a></li>
 									<li className={this.state.view}><a href="#">Contact Me</a></li>
