@@ -1,9 +1,9 @@
-body{
+*{
     margin: 0;
     padding: 0;
 }
 
-ul {
+ul{
     list-style-type: none;
     margin: 0;
     padding: 3px;
@@ -58,6 +58,14 @@ li.show{
 	transition: transform 0.5s ease-in;
 	-webkit-transform: translate(0em,0);
     transform: translate(0em,0);
+}
+
+#footmain{
+	 position: absolute;
+    bottom: 0;
+    width: 98.5%;
+    padding: 10px;
+	 background-color: blue;
 }
 
 

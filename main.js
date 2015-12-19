@@ -36,5 +36,14 @@ var Nav = React.createClass({
 					);		
 				}		
 		});
-		
+
+var Foot = React.createClass({
+						
+				render: function(){
+					return (
+							<p>Hola esto es el pie</p>
+					);		
+				}		
+		});
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
+ReactDOM.render(<Foot/>,document.getElementById("footmain"));
