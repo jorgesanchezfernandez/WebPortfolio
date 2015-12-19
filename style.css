@@ -1,42 +1,56 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 3px;
     overflow: hidden;
-    background-color: blue;
+    border: 1px solid #0066FF;
+    background: blue; /* For browsers that do not support gradients */    
+    background: -moz-linear-gradient(right, blue, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, blue , white); /* Standard syntax (must be last) */
+    box-shadow: 10px 10px 5px #888888
 }
 
 li {
-   display: inline-block;
+    display: inline-block;
+    margin: 3px;
 }
 
 li a {
     display: block;
     color: white;
+    text-shadow: 2px 2px 4px #000000;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    -webkit-transition: box-shadow 0.5s ease-in-out; /* Chrome, Safari, Opera */
+    transition: box-shadow 0.5s ease-in-out;
 }
 
 li a:hover {
-    -webkit-transition: box-shadow 2s; /* Chrome, Safari, Opera */
-     transition: box-shadow 2s; 
-     box-shadow: 10px 20px 30px black;   
+	 
+    box-shadow: 10px 20px 30px black;   
 }
 
 li#home {
-	background-color: black;
+	background-color: blue;
 }
 
 li#homeonClick{
-	background-color: yellow;
+	background-color: blue;
 }
 
 li.hide{
 	transition: -webkit-transform 0.5s ease-in;
 	transition: transform 0.5s ease-in;
-	-webkit-transform: translate(-30em,0);
-    transform: translate(-30em,0);
+	-webkit-transform: translate(0,-10em);
+    transform: translate(0,-10em);
 }
 
 li.show{
