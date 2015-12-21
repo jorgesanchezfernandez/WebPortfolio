@@ -35,27 +35,57 @@ li:hover {
     box-shadow: 10px 20px 30px black;   
 }
 
-/*Hide the menu with a animation*/
+/*Hides the menu with a animation*/
 li[data-menu=menuActfalse]{
 	-webkit-transform: translate(0,-10em);
     transform: translate(0,-10em);
 }
 
-/*Show the menu with a animation*/
+/*Shows the menu with a animation*/
 li[data-menu=menuActtrue]{
 	-webkit-transform: translate(0em,0);
     transform: translate(0em,0);
 }
 
-/*Paint active button*/
+/*Paints active button*/
 li[data-active=true]
 {
 	background-color: yellow;
 }
-/*No paint inactive button*/
+/*No paints inactive button*/
 li[data-active=false]
 {
 	background-color: blue;
+}
+
+/*Shows About Me section*/
+#me [data-active=true]{
+	background-color: green;
+}
+
+/*Hides About Me section*/
+#me [data-active=false]{
+	background-color: red;
+}
+
+/*Shows Work section*/
+#work [data-active=true]{
+	background-color: green;
+}
+
+/*Hides Work section*/
+#work [data-active=false]{
+	background-color: red;
+}
+
+/*Shows Contact Me section*/
+#contact [data-active=true]{
+	background-color: green;
+}
+
+/*Hides Contact Me section*/
+#contact [data-active=false]{
+	background-color: red;
 }
 
 #footmain{
