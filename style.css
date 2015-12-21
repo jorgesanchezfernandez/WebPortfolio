@@ -50,42 +50,58 @@ li[data-menu=menuActtrue]{
 /*Paints active button*/
 li[data-active=true]
 {
-	background-color: yellow;
+	background-color: #F7FE2E;
+	color: black;
 }
 /*No paints inactive button*/
 li[data-active=false]
 {
 	background-color: blue;
+	color: white;
 }
 
-/*Shows About Me section*/
-#me [data-active=true]{
-	background-color: green;
+section{
+	 display: block;
+	-webkit-transition: all 0.5s ease-in-out; /* Chrome, Safari, Opera */
+    transition: all 0.5s ease-in-out;
 }
 
-/*Hides About Me section*/
-#me [data-active=false]{
-	background-color: red;
+article{
+		display: inline-block;
+		border: 7px solid #0066FF;
+		border-radius: 25px;
+		background: rgba(0, 78, 220, 0.8);
+		-webkit-transition: all 0.5s ease-in-out; /* Chrome, Safari, Opera */
+      transition: all 0.5s ease-in-out;
 }
 
-/*Shows Work section*/
-#work [data-active=true]{
-	background-color: green;
+/*Shows section*/
+section[data-active=true]{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
 
-/*Hides Work section*/
-#work [data-active=false]{
-	background-color: red;
+/*Hides section*/
+section[data-active=false]{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-90em, -50%);
 }
-
-/*Shows Contact Me section*/
-#contact [data-active=true]{
-	background-color: green;
+/*Shows section*/
+section[data-name="prog"][data-active=true]{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
-
-/*Hides Contact Me section*/
-#contact [data-active=false]{
-	background-color: red;
+article[data-prop="click"]:hover{
+	background-color: #F7FE2E;
 }
 
 #footmain{

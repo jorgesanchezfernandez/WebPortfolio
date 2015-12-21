@@ -113,9 +113,22 @@ var Me = React.createClass({
 	render: function(){	
 		
 		return (
-			<article data-active={this.state.sectMeAct}>
-				<p>Hola esto es About me section</p>
-			</article>	
+			<section data-active={this.state.sectMeAct}>
+				<article id="aboutMe">
+					<div id="photo">
+					   <figure>
+					   	<img src="images/me.png" alt=""/> 
+					   </figure>
+					</div>
+					<div id="meDescription">
+						<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin nisi a metus vestibulum, vel rutrum neque condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et sem urna. Phasellus eu orci massa. Pellentesque eu efficitur purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vitae tristique nibh. Nulla ac vulputate nibh, hendrerit sagittis neque.
+
+Fusce pharetra lobortis pellentesque. Ut volutpat velit id laoreet vestibulum. Proin facilisis iaculis lectus, quis fringilla nulla hendrerit vel. Morbi blandit dapibus felis, tempus venenatis felis molestie ac. Vivamus in egestas libero. Fusce vehicula arcu non nisi dignissim volutpat. Donec vestibulum malesuada nunc vel ultrices. Sed libero ante, gravida eget viverra id, pharetra sit amet arcu.
+
+Mauris commodo tellus mauris. Suspendisse rhoncus accumsan consectetur. Donec a dapibus lorem. Vestibulum non ex magna. Donec volutpat justo sit amet ullamcorper congue. Integer efficitur venenatis nulla, vel pharetra est tempus vel. Praesent pulvinar efficitur mauris. Curabitur nisi tellus, hendrerit ut aliquet vitae, viverra et nibh. Sed dictum varius tincidunt. Maecenas a tincidunt libero, eu convallis felis. Nunc nec elit ac mauris gravida dignissim eget at nulla. Proin dictum sem tincidunt, maximus nunc id, commodo sem. </p>
+					</div>
+				</article>
+			</section>	
 		);		
 	}		
 });
@@ -134,13 +147,43 @@ var Work = React.createClass({
 	activateHandle: function(bool){
 		this.setState({ sectWorkAct: bool })      //If it's called, get the transfered state
 	},
+	
+	show: function(){
+		console.log("Clicked!");
+	},
 
 	render: function(){	
 		
 		return (
-			<article data-active={this.state.sectWorkAct}>
-				<p>Hola esto es Work section</p>
-			</article>	
+			<section data-name="prog" data-active={this.state.sectWorkAct}>
+				<article id="pilgrim" data-prop="click" onClick={this.show}>
+					<p>Codex</p>
+					<div class="placeholder">
+					   <figure><img src="images/codex.png" alt=""/>
+							<figcaption>El codex en ceiec
+							</figcaption>		   
+					   </figure>
+					</div>
+				</article>
+				<article id="cube" data-prop="click" onClick={this.show}>
+					<p>cube</p>
+					<div class="placeholder">
+					 <figure><img src="images/cube.png" alt=""/>
+							<figcaption>Cube en ceiec
+							</figcaption>		   
+					   </figure>	
+					</div>
+				</article>
+				<article id="demo" data-prop="click" onClick={this.show}>
+					<p>Demoscene</p>
+					<div class="placeholder">
+						<figure><img src="images/demo.png" alt=""/>
+							<figcaption>Timescratchers demos
+							</figcaption>		   
+					   </figure>
+					</div>		
+				</article>
+			</section>	
 		);		
 	}		
 });
@@ -163,9 +206,11 @@ var Contact = React.createClass({
 	render: function(){
 		
 		return (
-			<article data-active={this.state.sectContactAct}>
-				<p>Hola esto es Contact section</p>
-			</article>	
+			<section data-active={this.state.sectContactAct}>
+				<article id="contactMe">
+					<p>Contact me</p>			
+				</article>
+			</section>	
 		);		
 	}		
 });
