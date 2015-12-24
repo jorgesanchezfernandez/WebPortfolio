@@ -70,7 +70,7 @@ var Nav = React.createClass({
 			{
 				this.setState({ btnContactAct: true,    //Active button
 									 btnMeAct: false,        //Active button
-									 btnWorkAct: false,      //Inactive button
+									 btnWorkAct: false      //Inactive button
 								  })
 								  
 				meRender.activateHandle(false);        //Inactive id="Me"
@@ -139,7 +139,7 @@ var Work = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectWorkAct: false };         //Section id="Work" activate or inactivate
+			return {  sectWorkAct: false	};         //Section id="Work" activate or inactivate
 					 							
 	},
 	
@@ -147,45 +147,135 @@ var Work = React.createClass({
 	activateHandle: function(bool){
 		this.setState({ sectWorkAct: bool })      //If it's called, get the transfered state
 	},
-	
-	show: function(){
-		console.log("Clicked!");
-	},
+
 
 	render: function(){	
 		
 		return (
-			<section data-name="prog" data-active={this.state.sectWorkAct}>
-				<article id="pilgrim" data-prop="click" onClick={this.show}>
-					<p>Codex</p>
-					<div class="placeholder">
+			<section id="work" data-name="prog" data-active={this.state.sectWorkAct}>
+				<article clasName="pilgrim" data-prop="click" onClick={storageRender.activePilgrim}>
+					<div className="placeholder" data-name="itemWork">
+						<p>Codex</p>
 					   <figure><img src="images/codex.png" alt=""/>
 							<figcaption>El codex en ceiec
 							</figcaption>		   
 					   </figure>
 					</div>
 				</article>
-				<article id="cube" data-prop="click" onClick={this.show}>
-					<p>cube</p>
-					<div class="placeholder">
-					 <figure><img src="images/cube.png" alt=""/>
-							<figcaption>Cube en ceiec
-							</figcaption>		   
-					   </figure>	
+				<article className="cube" data-prop="click" onClick={storageRender.activeCube}>
+					<div className="placeholder" data-name="itemWork">
+						 <p>cube</p>
+						 <figure><img src="images/cube.png" alt=""/>
+								<figcaption>Cube en ceiec
+								</figcaption>		   
+						   </figure>	
 					</div>
 				</article>
-				<article id="demo" data-prop="click" onClick={this.show}>
-					<p>Demoscene</p>
-					<div class="placeholder">
+				<article className="demo" data-prop="click" onClick={storageRender.activeDemo}>
+					<div className="placeholder" data-name="itemWork">
+						<p>Demoscene</p>
 						<figure><img src="images/demo.png" alt=""/>
 							<figcaption>Timescratchers demos
 							</figcaption>		   
 					   </figure>
 					</div>		
 				</article>
-			</section>	
-		);		
+			</section>
+		);
+			
 	}		
+});
+
+var Storage = React.createClass({
+	
+	//////Initialize states
+	  getInitialState: function () {
+	  	
+			return {  itemPilgrim: "item-out",
+						 itemCube: "item-out",
+						 itemDemo: "item-out",
+						 sectContentAct: false												
+												 };         //Section id="Work" activate or inactivate
+					 							
+	},
+	
+	//////Activate items
+	activePilgrim: function(){
+		
+		workRender.activateHandle(false);
+		this.setState({
+							itemPilgrim: "item-in", 
+							sectContentAct: true
+						  });
+	},
+	activeCube: function(){
+		
+		workRender.activateHandle(false);
+		this.setState({ 		
+		 					itemCube: "item-in" , 
+		 					sectContentAct: true 
+		 				  });
+	},
+	activeDemo: function(){
+		
+		workRender.activateHandle(false);
+		this.setState({							 
+							itemDemo: "item-in", 
+							sectContentAct: true
+						  });
+	},
+	
+	//////Inactive items
+	inactivePilgrim: function(){
+		
+		workRender.activateHandle(true);
+		this.setState({
+							itemPilgrim: "item-out", 
+							sectContentAct: false
+						  });
+	},
+	inactiveCube: function(){
+		
+		workRender.activateHandle(true);
+		this.setState({
+							itemCube: "item-out", 
+							sectContentAct: false
+						  });	
+	},
+	inactiveDemo: function(){
+		
+		workRender.activateHandle(true);
+		this.setState({ 
+							itemDemo: "item-out", 
+							sectContentAct: false
+						  });
+	},
+	
+	render: function(){	
+		return(
+			<section data-name="storage" data-active={this.state.sectContentAct}>
+				<article className="pilgrim">
+					<div id="stCodex" className={this.state.itemPilgrim}>
+						<div onClick={this.inactivePilgrim}>X</div>
+							<p> src="https://www.youtube.com/watch?v=zeIvEIjaXSs"</p>
+					</div> 
+				</article>
+				<article className="cube">
+					<div id="stCube" className={this.state.itemCube}>
+						<div onClick={this.inactiveCube}>X</div>
+						<p>https://www.youtube.com/watch?v=OTZnQo0PPvc</p>
+					</div>
+				</article>
+				<article className="demo">
+					<div id="stDemo" className={this.state.itemDemo}>
+						<div onClick={this.inactiveDemo}>X</div>
+						<p>https://www.youtube.com/watch?v=AAsqMT0IGcc</p>
+					</div>
+				</article>
+			</section>
+
+		);	
+	}
 });
 
 ///// About Contact section
@@ -228,6 +318,7 @@ var Foot = React.createClass({
 /////Render functions
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
+var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
 var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
 var contactRender = ReactDOM.render(<Contact/>,document.getElementById("contact"));
 ReactDOM.render(<Foot/>,document.getElementById("footmain"));
