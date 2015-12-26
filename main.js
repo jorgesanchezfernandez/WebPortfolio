@@ -291,13 +291,13 @@ var Storage = React.createClass({
 				<article className="cube">
 					<div id="stCube" className={this.state.itemCube}>
 						<div onClick={this.inactiveCube}>X</div>
-						<p>https://www.youtube.com/watch?v=OTZnQo0PPvc</p>
+						<img src="images/cubeImages.png" alt="Cube image"/>
 					</div>
 				</article>
 				<article className="demo">
 					<div id="stDemo" className={this.state.itemDemo}>
 						<div onClick={this.inactiveDemo}>X</div>
-						<p>https://www.youtube.com/watch?v=AAsqMT0IGcc</p>
+						<img src="images/demoImages.png" alt="Demoscene image"/>
 					</div>
 				</article>
 			</section>
@@ -326,7 +326,19 @@ var Contact = React.createClass({
 		return (
 			<section data-active={this.state.sectContactAct}>
 				<article id="contactMe">
-					<p>Contact me</p>			
+					 <form action="">
+						<p>Please enter your name:</p>
+						<input type="text" name="name"/>
+						<p>E-mail:</p>
+  						<input type="email" name="email"/><br></br>
+  						  <select value="B">
+						    <option value="A">Apple</option>
+						    <option value="B">Banana</option>
+						    <option value="C">Cranberry</option>
+						  </select><br></br>
+						  <textarea name="textarea" rows="10" cols="31">Write your message</textarea> <br></br>
+						<input type="submit" value="Submit"/>
+					</form> 		
 				</article>
 			</section>	
 		);		
@@ -338,7 +350,7 @@ var Foot = React.createClass({
 						
 	render: function(){
 		return (
-				<p>Hola esto es el pie</p>
+				<p>Jorge Sánchez Fernández Portfolio</p>
 		);		
 	}		
 });

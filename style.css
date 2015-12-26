@@ -130,6 +130,10 @@ article[data-prop="click"]:hover{
   transform: translate(-50%, -50%);
 }
 
+textarea{
+	resize: none;
+}
+
 #footmain{
 	 position: absolute;
     bottom: 0;
