@@ -30,6 +30,7 @@ var Nav = React.createClass({
 			meRender.activateHandle(false);			//Inactive id="Me"
 			workRender.activateHandle(false);      //Inactive id="Work"
 			contactRender.activateHandle(false);   //Inactive id="Contact"	
+			storageRender.inactiveAll();
 		},
 
 		//////If About me was clicked
@@ -45,6 +46,7 @@ var Nav = React.createClass({
 				meRender.activateHandle(true);			  //Active id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
 				contactRender.activateHandle(false);   //Inactive id="Contact"
+				storageRender.inactiveAll();
 			} 
 		},
 		
@@ -60,6 +62,7 @@ var Nav = React.createClass({
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(true);       //Active id="Work"
 				contactRender.activateHandle(false);   //Inactive id="Contact"
+				storageRender.inactiveAll();
 			}
 		},
 		
@@ -76,6 +79,7 @@ var Nav = React.createClass({
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
 				contactRender.activateHandle(true);   //Active id="Contact"
+				storageRender.inactiveAll();
 			}
 				 
 		},
@@ -145,7 +149,8 @@ var Work = React.createClass({
 	
 	//////Activate or inactive section Work state
 	activateHandle: function(bool){
-		this.setState({ sectWorkAct: bool })      //If it's called, get the transfered state
+
+		this.setState({ sectWorkAct: bool })     //If it's called, get the transfered state		
 	},
 
 
@@ -233,6 +238,9 @@ var Storage = React.createClass({
 							itemPilgrim: "item-out", 
 							sectContentAct: false
 						  });
+		var video = document.getElementById("videoCodex");
+		video.pause();
+		
 	},
 	inactiveCube: function(){
 		
@@ -251,13 +259,33 @@ var Storage = React.createClass({
 						  });
 	},
 	
+	inactiveAll: function(){
+		this.setState({
+							itemPilgrim: "item-out", 
+							sectContentAct: false
+						  });
+		var video = document.getElementById("videoCodex");
+		video.pause();
+		this.setState({
+							itemCube: "item-out", 
+							sectContentAct: false
+						  });
+		this.setState({ 
+							itemDemo: "item-out", 
+							sectContentAct: false
+						  });
+	},
+	
 	render: function(){	
 		return(
 			<section data-name="storage" data-active={this.state.sectContentAct}>
 				<article className="pilgrim">
 					<div id="stCodex" className={this.state.itemPilgrim}>
 						<div onClick={this.inactivePilgrim}>X</div>
-							<p> src="https://www.youtube.com/watch?v=zeIvEIjaXSs"</p>
+							 <video id="videoCodex" width="420" height="340" controls>
+								  <source src="videos/codex.mp4" type="video/mp4" />
+								  Your browser does not support the video tag.
+							 </video> 
 					</div> 
 				</article>
 				<article className="cube">
