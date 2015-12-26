@@ -4,6 +4,65 @@
 //////  HTML5 - CSS3 - JQuery - Canvas     ///////
 //////////////////////////////////////////////////
 
+//////Canvas component
+var Canvas = React.createClass({
+	
+	init: function () {
+		
+		var canvas = document.getElementById('myCanvas');
+
+		  if (canvas.getContext)
+		  {
+		    var ctx = canvas.getContext('2d');
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		    for(var i=0;i<3;i++){
+		      for(var j=0;j<3;j++){
+		        ctx.beginPath();
+		        var x = Math.floor((Math.random() * 50)*(i+1) + 45); // x coordinate
+		        var y = Math.floor((Math.random() * 50)*(j+1) + 40); // y coordinate
+		        var radius = Math.floor((Math.random() * 30) + 25);  // Arc radius
+		        var radius1 = Math.floor((Math.random() * 18) + 15); 
+		        var radius2 = Math.floor((Math.random() * 10) + 7); 
+		        var startAngle = 0; // Starting point on circle
+		        var endAngle = 2 * Math.PI; // End point on circle
+		        var anticlockwise = i%2==0 ? false : true; // clockwise or anticlockwise
+		
+		
+		        
+				  ctx.fillStyle="#0000FF";
+		        ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+				  ctx.fill();
+				  ctx.beginPath();
+				  ctx.fillStyle="#FFFFFF";
+				  ctx.arc(x, y, radius1 , startAngle, endAngle, anticlockwise);
+				  ctx.fill();
+				  ctx.beginPath();
+				  ctx.fillStyle="#0000FF";
+				  ctx.arc(x, y, radius2, startAngle, endAngle, anticlockwise);
+				  ctx.fill();
+		
+		
+		      }
+		    }
+		  }
+	},
+	
+	componentDidMount: function () {
+		//Start to paint
+		this.init();	
+	},
+	
+	render: function(){		
+			
+			return (
+					<canvas width="400" height="400" id="myCanvas">Your browser does not support canvas</canvas>			
+			);					
+		}	
+
+});
+
 //////Navigation component
 var Nav = React.createClass({
 			
@@ -31,6 +90,7 @@ var Nav = React.createClass({
 			workRender.activateHandle(false);      //Inactive id="Work"
 			contactRender.activateHandle(false);   //Inactive id="Contact"	
 			storageRender.inactiveAll();
+			initCanvas.init();
 		},
 
 		//////If About me was clicked
@@ -356,6 +416,7 @@ var Foot = React.createClass({
 });
 
 /////Render functions
+var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
 var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
