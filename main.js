@@ -372,7 +372,7 @@ var Contact = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectContactAct: false };         //Section id="Contact" activate or inactivate
+			return {  sectContactAct: false, data: [] };         //Section id="Contact" activate or inactivate
 					 							
 	},
 	
@@ -380,29 +380,54 @@ var Contact = React.createClass({
 	activateHandle: function(bool){
 		this.setState({ sectContactAct: bool })      //If it's called, get the transfered state
 	},
+	
+	componentDidMount: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
 
 	render: function(){
 		
 		return (
 			<section data-active={this.state.sectContactAct}>
 				<article id="contactMe">
-					 <form action="">
+					 <form method="post" action="mailto:xhercs@gmail.com">
 						<p>Please enter your name:</p>
 						<input type="text" name="name"/>
 						<p>E-mail:</p>
   						<input type="email" name="email"/><br></br>
-  						  <select value="B">
-						    <option value="A">Apple</option>
-						    <option value="B">Banana</option>
-						    <option value="C">Cranberry</option>
-						  </select><br></br>
+  							 <ValueList data={this.state.data} /><br></br>
 						  <textarea name="textarea" rows="10" cols="31">Write your message</textarea> <br></br>
-						<input type="submit" value="Submit"/>
+						<input type="submit" value="Send email"/>
 					</form> 		
 				</article>
 			</section>	
 		);		
 	}		
+});
+
+var ValueList = React.createClass({
+  render: function() {
+    var dataNodes = this.props.data.map(function(values) {
+	      return (	       
+				    <option value={values.id}>{values.from}</option>
+	      );
+	 });
+    return (
+      	<select>
+  				{dataNodes}
+  			</select>
+    );
+  }
 });
 
 ///// About Footer section
@@ -421,5 +446,6 @@ ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
 var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
 var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
-var contactRender = ReactDOM.render(<Contact/>,document.getElementById("contact"));
+var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
+
 ReactDOM.render(<Foot/>,document.getElementById("footmain"));
