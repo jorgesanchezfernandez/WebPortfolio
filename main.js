@@ -90,9 +90,9 @@ var Nav = React.createClass({
 							  
 			meRender.activateHandle(false);			//Inactive id="Me"
 			workRender.activateHandle(false);      //Inactive id="Work"
-			contactRender.activateHandle(false);   //Inactive id="Contact"	
-			storageRender.inactiveAll();
+			workRender.inactiveAll();
 			initCanvas.init();
+
 		},
 
 		//////If About me was clicked
@@ -102,14 +102,15 @@ var Nav = React.createClass({
 			{
 				this.setState({ btnMeAct: true,        //Active button
 									 btnWorkAct: false,     //Inactive button
-									 btnCanvasDemo:false,				//Inactive button
+									 btnCanvasDemo:false,	//Inactive button
 									 btnContactAct: false	//inactive button
 								  })
 								  
 				meRender.activateHandle(true);			  //Active id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(false);   //Inactive id="Contact"
-				storageRender.inactiveAll();
+				workRender.inactiveAll();
+				window.location.hash = '#me';
+
 			} 
 		},
 		//////If My Work was clicked
@@ -124,8 +125,8 @@ var Nav = React.createClass({
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(true);       //Active id="Work"
-				contactRender.activateHandle(false);   //Inactive id="Contact"
-				storageRender.inactiveAll();
+				workRender.inactiveAll();
+				window.location.hash = '#work';
 			}
 		},
 		
@@ -141,8 +142,8 @@ var Nav = React.createClass({
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);       //Active id="Work"
-				contactRender.activateHandle(false);   //Inactive id="Contact"
-				storageRender.inactiveAll();
+				workRender.inactiveAll();
+				window.location.hash = '#canvas';
 			}
 		},
 		
@@ -159,8 +160,8 @@ var Nav = React.createClass({
 								  
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(true);   //Active id="Contact"
-				storageRender.inactiveAll();
+				workRender.inactiveAll();
+				window.location.hash = '#contact';
 			}
 				 
 		},
@@ -172,12 +173,12 @@ var Nav = React.createClass({
 			return (
 					<ul>
 						<li onClick={this.goHome}><img src="images/menu.png" /></li>
-    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>Me</li>
-    					<li data-menu={menuActName} data-active={this.state.btnSkills} onClick={this.goSkills}>Skills</li>
-    					<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Web</li>	
+    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>	
 						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>Visualisation</li>
-						<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Canvas Demo</li>					
+						<li data-menu={menuActName}>Download CV</li>
+						<li data-menu={menuActName}>Canvas Demo</li>
 						<li data-menu={menuActName} data-active={this.state.btnContactAct} onClick={this.goContact}>Contact Me</li>
+
 					</ul>
 			);		
 		}		
@@ -201,21 +202,24 @@ var Me = React.createClass({
 	render: function(){	
 		
 		return (
-			<section data-active={this.state.sectMeAct}>
-				<article id="aboutMe">
-					<div id="photo">
-					   <figure>
-					   	<img src="images/me.png" alt=""/> 
-					   </figure>
-					</div>
-					<div id="meDescription">
-					  <p>
-					  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
-					  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
-					  </p>
-					</div>
-				</article>
-			</section>	
+			<section>
+				<p className="divInfo">About me</p>
+				<section data-active={this.state.sectMeAct}>
+					<article id="aboutMe">
+						<div id="photo">
+						   <figure>
+						   	<img src="images/me.png" alt=""/> 
+						   </figure>
+						</div>
+						<div id="meDescription">
+						  <p>
+						  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
+						  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
+						  </p>
+						</div>
+					</article>
+				</section>	
+			</section>
 		);		
 	}		
 });
@@ -226,7 +230,11 @@ var Work = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectWorkAct: false	};         //Section id="Work" activate or inactivate
+			return {  sectWorkAct: false, //Section id="Work" activate or inactivate
+						 itemPilgrim: "item-out",
+						 itemCube: "item-out",
+						 itemDemo: "item-out",
+						 sectContentAct: false		};         
 					 							
 	},
 	
@@ -235,159 +243,143 @@ var Work = React.createClass({
 
 		this.setState({ sectWorkAct: bool })     //If it's called, get the transfered state		
 	},
-
-
-	render: function(){	
-		
-		return (
-			<section id="work" data-name="prog" data-active={this.state.sectWorkAct}>
-				<article clasName="pilgrim" data-prop="click" onClick={storageRender.activePilgrim}>
-					<div className="placeholder" data-name="itemWork">
-						<p>Codex</p>
-					   <figure><img src="images/codex.png" alt=""/>
-							<figcaption>El codex en ceiec
-							</figcaption>		   
-					   </figure>
-					</div>
-				</article>
-				<article className="cube" data-prop="click" onClick={storageRender.activeCube}>
-					<div className="placeholder" data-name="itemWork">
-						 <p>cube</p>
-						 <figure><img src="images/cube.png" alt=""/>
-								<figcaption>Cube en ceiec
-								</figcaption>		   
-						   </figure>	
-					</div>
-				</article>
-				<article className="demo" data-prop="click" onClick={storageRender.activeDemo}>
-					<div className="placeholder" data-name="itemWork">
-						<p>Demoscene</p>
-						<figure><img src="images/demo.png" alt=""/>
-							<figcaption>Timescratchers demos
-							</figcaption>		   
-					   </figure>
-					</div>		
-				</article>
-			</section>
-		);
-			
-	}		
-});
-
-var Storage = React.createClass({
-	
-	//////Initialize states
-	  getInitialState: function () {
-	  	
-			return {  itemPilgrim: "item-out",
-						 itemCube: "item-out",
-						 itemDemo: "item-out",
-						 sectContentAct: false												
-												 };         //Section id="Work" activate or inactivate
-					 							
-	},
 	
 	//////Activate items
 	activePilgrim: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({
 							itemPilgrim: "item-in", 
 							sectContentAct: true
-						  });
+						  })
 	},
+	
 	activeCube: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({ 		
 		 					itemCube: "item-in" , 
 		 					sectContentAct: true 
-		 				  });
+		 				  })
 	},
+	
 	activeDemo: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({							 
 							itemDemo: "item-in", 
 							sectContentAct: true
-						  });
+						  })
 	},
 	
 	//////Inactive items
 	inactivePilgrim: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({
 							itemPilgrim: "item-out", 
 							sectContentAct: false
-						  });
+						  })
 		var video = document.getElementById("videoCodex");
 		video.pause();
 		
 	},
+	
 	inactiveCube: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({
 							itemCube: "item-out", 
 							sectContentAct: false
-						  });	
+						  })
 	},
+	
 	inactiveDemo: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({ 
 							itemDemo: "item-out", 
 							sectContentAct: false
-						  });
+						  })
 	},
 	
 	inactiveAll: function(){
 		this.setState({
 							itemPilgrim: "item-out", 
-							sectContentAct: false
-						  });
-		var video = document.getElementById("videoCodex");
-		video.pause();
-		this.setState({
-							itemCube: "item-out", 
-							sectContentAct: false
-						  });
-		this.setState({ 
+							itemCube: "item-out",
 							itemDemo: "item-out", 
 							sectContentAct: false
-						  });
-	},
-	
-	render: function(){	
-		return(
-			<section data-name="storage" data-active={this.state.sectContentAct}>
-				<article className="pilgrim">
-					<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
-						<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
-							 <video id="videoCodex" width="420" height="340" controls>
-								  <source src="videos/codex.mp4" type="video/mp4" />
-								  Your browser does not support the video tag.
-							 </video> 
-					</div> 
-				</article>
-				<article className="cube">
-					<div id="stCube" className={this.state.itemCube} data-name="content">
-						<div className="crossButton" onClick={this.inactiveCube}>X</div>
-						<img src="images/cubeImages.png" alt="Cube image"/>
-					</div>
-				</article>
-				<article className="demo">
-					<div id="stDemo" className={this.state.itemDemo} data-name="content">
-						<div className="crossButton" onClick={this.inactiveDemo}>X</div>
-						<img src="images/demoImages.png" alt="Demoscene image"/>
-					</div>
-				</article>
-			</section>
+						  })
+		var video = document.getElementById("videoCodex");
+		video.pause();
 
-		);	
-	}
+	},
+
+	render: function(){	
+		
+		return (
+				<section id="visualisation">
+					<p className="divInfo">Visualization Work</p>
+					<section data-name="prog" data-active={this.state.sectWorkAct}>
+						<article clasName="pilgrim" data-prop="click" onClick={this.activePilgrim}>
+							<div className="placeholder" data-name="itemWork">
+								<p>Codex</p>
+							   <figure><img src="images/codex.png" alt=""/>
+									<figcaption>El codex en ceiec
+									</figcaption>		   
+							   </figure>
+							</div>
+						</article>
+						<article className="cube" data-prop="click" onClick={this.activeCube}>
+							<div className="placeholder" data-name="itemWork">
+								 <p>cube</p>
+								 <figure><img src="images/cube.png" alt=""/>
+										<figcaption>Cube en ceiec
+										</figcaption>		   
+								   </figure>	
+							</div>
+						</article>
+						<article className="demo" data-prop="click" onClick={this.activeDemo}>
+							<div className="placeholder" data-name="itemWork">
+								<p>Demoscene</p>
+								<figure><img src="images/demo.png" alt=""/>
+									<figcaption>Timescratchers demos
+									</figcaption>		   
+							   </figure>
+							</div>		
+						</article>
+					</section>
+
+					<section data-name="storage" data-active={this.state.sectContentAct}>
+						<article className="pilgrim">
+							<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
+								<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
+									 <video id="videoCodex" width="420" height="340" controls>
+										  <source src="videos/codex.mp4" type="video/mp4" />
+										  Your browser does not support the video tag.
+									 </video> 
+							</div> 
+						</article>
+						<article className="cube">
+							<div id="stCube" className={this.state.itemCube} data-name="content">
+								<div className="crossButton" onClick={this.inactiveCube}>X</div>
+								<img src="images/cubeImages.png" alt="Cube image"/>
+							</div>
+						</article>
+						<article className="demo">
+							<div id="stDemo" className={this.state.itemDemo} data-name="content">
+								<div className="crossButton" onClick={this.inactiveDemo}>X</div>
+								<img src="images/demoImages.png" alt="Demoscene image"/>
+							</div>
+						</article>
+					</section>
+				</section>
+
+		);
+			
+	}		
 });
+
 
 ///// About Contact section
 var Contact = React.createClass({
@@ -421,19 +413,12 @@ var Contact = React.createClass({
 	render: function(){
 		
 		return (
-			<section data-active={this.state.sectContactAct}>
-				<article id="contactMe">
-					 <form method="post" action="mailto:xhercs@gmail.com">
-						<p>Please enter your name:</p>
-						<input type="text" name="name"/>
-						<p>E-mail:</p>
-  						<input type="email" name="email"/><br></br>
-  							 <ValueList data={this.state.data} /><br></br>
-						  <textarea name="textarea" rows="10" cols="31">Write your message</textarea> <br></br>
-						<input type="submit" value="Send email"/>
-					</form> 		
-				</article>
-			</section>	
+			<section>
+				<p className="divInfo">Contact me</p>
+				<section>
+	  					<ValueList data={this.state.data} /><br></br>	
+				</section>	
+			</section>
 		);		
 	}		
 });
@@ -441,24 +426,32 @@ var Contact = React.createClass({
 var ValueList = React.createClass({
   render: function() {
     var dataNodes = this.props.data.map(function(values) {
-	      return (	       
-				    <option value={values.id}>{values.from}</option>
+	      return (		    	
+
+						<div>
+							<p>{values.id}</p>
+						   <figure><img src={values.image} alt=""/>
+								<figcaption>{values.contact}
+								</figcaption>		   
+						   </figure>
+						</div>
+
 	      );
 	 });
     return (
-      	<select>
+		<article id="contactMe">
   				{dataNodes}
-  			</select>
+  		</article>
     );
   }
 });
 
 
 /////Render functions
-//var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
+var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
-var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
+
 var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
 var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
 

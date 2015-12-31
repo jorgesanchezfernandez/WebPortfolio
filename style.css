@@ -10,6 +10,7 @@ html, body {
 
 div {
 	min-height: 100%; 
+	position: relative;
 }
 
 /*
@@ -29,22 +30,50 @@ div {
 	left: 50%;
 	height: 30%;
 	width: 50%;
-	margin: -15% 0 0 -25%;
-  text-align: center;
-  font-family: Helvetica, Arial, serif;
-  color: white;
-  text-shadow: 2px 2px black;
+   margin: -5% 0 0 -25%;
+   text-align: center;
+   font-family: Helvetica, Arial, serif;
+   color: white;
+   text-shadow: 2px 2px black;
  }
- 
+
+p.divInfo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 30%;
+	width: 50%;
+   margin: -15% 0 0 -25%;
+   text-align: center;
+   font-family: Helvetica, Arial, serif;
+   font-size: 50px;
+   font-weight: bold;
+   color: black;
+}
+
 h1{
   font-size: 4em;
 }
 
 #me{
+    background: url(images/me.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
+
 #work{
     background: url(images/dna.png) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#contact{
+    background: url(images/contact.png) no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -108,24 +137,20 @@ li[data-menu=menuActtrue]{
 
 li[data-active=true]
 {
-	background-color: #F7FE2E;
-	color: black;
+	border-color: yellow;
+	color: yellow;
 }
 
 li[data-active=false]
 {
-	background-color: blue;
+	background-color: rgba(0, 78, 220, 0.8);   
 	color: white;
 }
 
-
-
-
-/*
 section{
 	 display: block;
-	-webkit-transition: all 0.5s ease-in-out; 
-    transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.75s ease-in-out; 
+    transition: all 0.75s ease-in-out;
 }
 
 article{
@@ -140,61 +165,61 @@ article{
 
 
 section[data-active=true]{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
+	position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -20%;
+	transform: translate(-50%, -50%)
 }
 
 
 section[data-active=false]{
-  position: fixed;
-  top: 50%;
-  left: 50%;
+	position: absolute;
+   top: 50%;
+   left: 50%;
 
-  transform: translate(-90em, -50%);
+	transform: translate(-200em, -50%)
 }
 
+/*Shows section*/
 section[data-name="prog"][data-active=true]{
   position: absolute;
   top: 50%;
   left: 50%;
-
+  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
-
+/*Shows section contents*/
 section[data-name="storage"][data-active=true]{
   position: absolute;
   top: 50%;
   left: 50%;
-
+  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 
-
+/*Mark the article that you are hove it*/
 article[data-prop="click"]:hover{
 	background-color: #F7FE2E;
 }
-
+/*Put out of scene every item*/
 .item-out{
   position: fixed;
   top: 50%;
   left: 50%;
-
+  /* bring your own prefixes */
   transform: translate(-90em, -50%);
 }
 .item-in{
   position: fixed;
   top: 50%;
   left: 50%;
-
+  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 div [data-name="itemWork"]{
 	text-align: center;
 	font: 15px arial, sans-serif;
-	box-shadow: 10px 20px 30px black; 
 }
 
 div [data-name="content"]{
@@ -202,8 +227,7 @@ div [data-name="content"]{
 	background: #202020;
 	box-shadow: 10px 20px 30px black; 
 	border: 2px solid #808080;
-}*/
-/*
+}
 .crossButton{
 	color: white;
 	font: 15px arial, sans-serif;
@@ -213,7 +237,7 @@ div [data-name="content"]{
 textarea{
 	resize: none;
 }
-*/
+
 #footmain{
 	 position: absolute;
     bottom: 0;
