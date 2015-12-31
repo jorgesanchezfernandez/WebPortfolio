@@ -72,7 +72,8 @@ var Nav = React.createClass({
 			          menuAct: false ,          //Menu activate or inactivate
 						 btnMeAct: false,          //Button activate or inactivate
 						 btnWorkAct: false,        //Button activate or inactivate
-						 btnContactAct: false		//Button activate or inactivate			 
+						 btnCanvasDemo:false,		//Button activate or inactivate	
+						 btnContactAct: false		//Button activate or inactivate		 
 					 };
 											
 		},
@@ -83,6 +84,7 @@ var Nav = React.createClass({
 			this.setState({ menuAct: !this.state.menuAct,   //If clicked get opposite state
 								 btnMeAct: false,        			//Inactive button
 								 btnWorkAct: false,      			//Inactive button
+								 btnCanvasDemo:false,				//Inactive button
 								 btnContactAct: false   			//Inactive button
 							  })		
 							  
@@ -100,6 +102,7 @@ var Nav = React.createClass({
 			{
 				this.setState({ btnMeAct: true,        //Active button
 									 btnWorkAct: false,     //Inactive button
+									 btnCanvasDemo:false,				//Inactive button
 									 btnContactAct: false	//inactive button
 								  })
 								  
@@ -109,18 +112,35 @@ var Nav = React.createClass({
 				storageRender.inactiveAll();
 			} 
 		},
-		
 		//////If My Work was clicked
 		goWork: function () {
 			if (!this.state.btnWorkAct)					//Do if it's not already actived
 			{	
 				this.setState({ btnWorkAct: true,      //Active button
 				    				 btnMeAct: false,       //Inactive button
+				    				 btnCanvasDemo:false,	//Inactive button
 									 btnContactAct: false	//inactive button
 				              })
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(true);       //Active id="Work"
+				contactRender.activateHandle(false);   //Inactive id="Contact"
+				storageRender.inactiveAll();
+			}
+		},
+		
+		//////If My canvas demo was clicked
+		goCanvas: function () {
+			if (!this.state.btnWorkAct)					//Do if it's not already actived
+			{	
+				this.setState({ btnCanvasDemo:true,		//Active button
+									 btnWorkAct: false,     //Inactive button
+				    				 btnMeAct: false,       //Inactive button
+									 btnContactAct: false	//inactive button
+				              })
+				              
+				meRender.activateHandle(false);        //Inactive id="Me"
+				workRender.activateHandle(false);       //Active id="Work"
 				contactRender.activateHandle(false);   //Inactive id="Contact"
 				storageRender.inactiveAll();
 			}
@@ -132,8 +152,9 @@ var Nav = React.createClass({
 			if (!this.state.btnContactAct)             //Do if it's not already actived
 			{
 				this.setState({ btnContactAct: true,    //Active button
-									 btnMeAct: false,        //Active button
-									 btnWorkAct: false      //Inactive button
+									 btnMeAct: false,        //Inactive button
+									 btnCanvasDemo:false,	 //Inactive button
+									 btnWorkAct: false       //Inactive button
 								  })
 								  
 				meRender.activateHandle(false);        //Inactive id="Me"
@@ -151,8 +172,11 @@ var Nav = React.createClass({
 			return (
 					<ul>
 						<li onClick={this.goHome}><img src="images/menu.png" /></li>
-    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>
-						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>My Work</li>
+    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>Me</li>
+    					<li data-menu={menuActName} data-active={this.state.btnSkills} onClick={this.goSkills}>Skills</li>
+    					<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Web</li>	
+						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>Visualisation</li>
+						<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Canvas Demo</li>					
 						<li data-menu={menuActName} data-active={this.state.btnContactAct} onClick={this.goContact}>Contact Me</li>
 					</ul>
 			);		
@@ -429,22 +453,12 @@ var ValueList = React.createClass({
   }
 });
 
-///// About Footer section
-var Foot = React.createClass({
-						
-	render: function(){
-		return (
-				<p>Jorge Sánchez Fernández Portfolio</p>
-		);		
-	}		
-});
 
 /////Render functions
-var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
+//var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
 var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
 var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
 var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
 
-ReactDOM.render(<Foot/>,document.getElementById("footmain"));
