@@ -7,6 +7,22 @@
 //////Canvas component
 var Canvas = React.createClass({
 	
+	//////Initialize states
+	  getInitialState: function () {
+	  	
+			return { 
+						 sectCanvasAct: false,
+						 sectFadeIn: false					
+					 };         
+					 							
+	},
+	
+	//////Activate or inactive section Me state
+	activateHandle: function(bool){
+		this.setState({ sectCanvasAct: bool, sectFadeIn:bool })      //If it's called, get the transfered state
+		
+	},
+	
 	init: function () {
 		
 		var canvas = document.getElementById('myCanvas');
@@ -20,8 +36,8 @@ var Canvas = React.createClass({
 		    for(var i=0;i<3;i++){
 		      for(var j=0;j<3;j++){
 		        ctx.beginPath();
-		        var x = Math.floor((Math.random() * 50)*(i+1) + 45); // x coordinate
-		        var y = Math.floor((Math.random() * 50)*(j+1) + 40); // y coordinate
+		        var x = Math.floor((Math.random() * 80)*(i+1) + 45); // x coordinate
+		        var y = Math.floor((Math.random() * 80)*(j+1) + 40); // y coordinate
 		        var radius = Math.floor((Math.random() * 30) + 25);  // Arc radius
 		        var radius1 = Math.floor((Math.random() * 18) + 15); 
 		        var radius2 = Math.floor((Math.random() * 10) + 7); 
@@ -57,7 +73,15 @@ var Canvas = React.createClass({
 	render: function(){		
 			
 			return (
-					<canvas width="400" height="400" id="myCanvas">Your browser does not support canvas</canvas>			
+			<section data-fadein={this.state.sectFadeIn}>
+				<p className="divInfo">Canvas Demo</p>
+				<section data-active={this.state.sectCanvasAct} data-fadeIn={this.state.sectFadeIn}>
+					<article>
+						<canvas width="240" height="240" id="myCanvas">Your browser does not support canvas</canvas>
+					</article>
+					<button className="clear" onClick={this.init}>Click me!</button>
+				</section>
+			</section>		
 			);					
 		}	
 
@@ -73,7 +97,8 @@ var Nav = React.createClass({
 						 btnMeAct: false,          //Button activate or inactivate
 						 btnWorkAct: false,        //Button activate or inactivate
 						 btnCanvasDemo:false,		//Button activate or inactivate	
-						 btnContactAct: false		//Button activate or inactivate		 
+						 btnContactAct: false,		//Button activate or inactivate		 
+						 btnCVAct:false
 					 };
 											
 		},
@@ -85,11 +110,14 @@ var Nav = React.createClass({
 								 btnMeAct: false,        			//Inactive button
 								 btnWorkAct: false,      			//Inactive button
 								 btnCanvasDemo:false,				//Inactive button
-								 btnContactAct: false   			//Inactive button
+								 btnContactAct: false,   			//Inactive button
+								 btnCVAct:false
 							  })		
 							  
 			meRender.activateHandle(false);			//Inactive id="Me"
 			workRender.activateHandle(false);      //Inactive id="Work"
+			contactRender.activateHandle(false);
+			initCanvas.activateHandle(false);
 			workRender.inactiveAll();
 			initCanvas.init();
 
@@ -103,11 +131,14 @@ var Nav = React.createClass({
 				this.setState({ btnMeAct: true,        //Active button
 									 btnWorkAct: false,     //Inactive button
 									 btnCanvasDemo:false,	//Inactive button
-									 btnContactAct: false	//inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
 								  })
 								  
 				meRender.activateHandle(true);			  //Active id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(false);
 				workRender.inactiveAll();
 				window.location.hash = '#me';
 
@@ -120,11 +151,14 @@ var Nav = React.createClass({
 				this.setState({ btnWorkAct: true,      //Active button
 				    				 btnMeAct: false,       //Inactive button
 				    				 btnCanvasDemo:false,	//Inactive button
-									 btnContactAct: false	//inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
 				              })
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(true);       //Active id="Work"
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(false);
 				workRender.inactiveAll();
 				window.location.hash = '#work';
 			}
@@ -132,18 +166,34 @@ var Nav = React.createClass({
 		
 		//////If My canvas demo was clicked
 		goCanvas: function () {
-			if (!this.state.btnWorkAct)					//Do if it's not already actived
+			if (!this.state.btnCanvasAct)					//Do if it's not already actived
 			{	
 				this.setState({ btnCanvasDemo:true,		//Active button
 									 btnWorkAct: false,     //Inactive button
 				    				 btnMeAct: false,       //Inactive button
-									 btnContactAct: false	//inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
 				              })
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);       //Active id="Work"
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(true);
 				workRender.inactiveAll();
 				window.location.hash = '#canvas';
+			}
+		},
+		
+		goCV: function () {
+			if (!this.state.btnCVAct)					//Do if it's not already actived
+			{	
+				this.setState({ btnCanvasDemo:false,		//Inactive button
+									 btnWorkAct: false,     //Inactive button
+				    				 btnMeAct: false,       //Inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:true
+				              })
+
 			}
 		},
 		
@@ -155,11 +205,14 @@ var Nav = React.createClass({
 				this.setState({ btnContactAct: true,    //Active button
 									 btnMeAct: false,        //Inactive button
 									 btnCanvasDemo:false,	 //Inactive button
-									 btnWorkAct: false       //Inactive button
+									 btnWorkAct: false,       //Inactive button
+									 btnCVAct:false
 								  })
 								  
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
+				contactRender.activateHandle(true);
+				initCanvas.activateHandle(false);
 				workRender.inactiveAll();
 				window.location.hash = '#contact';
 			}
@@ -175,8 +228,8 @@ var Nav = React.createClass({
 						<li onClick={this.goHome}><img src="images/menu.png" /></li>
     					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>	
 						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>Visualisation</li>
-						<li data-menu={menuActName}>Download CV</li>
-						<li data-menu={menuActName}>Canvas Demo</li>
+						<a id="aMenu"href="JorgeSanchezCV.pdf" download><li data-menu={menuActName} data-active={this.state.btnCVAct} onClick={this.goCV}>Download CV</li></a>
+						<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Canvas Demo</li>
 						<li data-menu={menuActName} data-active={this.state.btnContactAct} onClick={this.goContact}>Contact Me</li>
 
 					</ul>
@@ -190,19 +243,22 @@ var Me = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectMeAct: false };         //Section id="Me" activate or inactivate
+			return {  sectMeAct: false, 	//Section id="Me" activate or inactivate
+						 sectFadeIn: false					
+					 };         
 					 							
 	},
 	
 	//////Activate or inactive section Me state
 	activateHandle: function(bool){
-		this.setState({ sectMeAct: bool })      //If it's called, get the transfered state
+		this.setState({ sectMeAct: bool,sectFadeIn:bool })      //If it's called, get the transfered state
+		
 	},
 
 	render: function(){	
 		
 		return (
-			<section>
+			<section data-fadein={this.state.sectFadeIn}>
 				<p className="divInfo">About me</p>
 				<section data-active={this.state.sectMeAct}>
 					<article id="aboutMe">
@@ -234,14 +290,16 @@ var Work = React.createClass({
 						 itemPilgrim: "item-out",
 						 itemCube: "item-out",
 						 itemDemo: "item-out",
-						 sectContentAct: false		};         
+						 sectContentAct: false,
+						 sectFadeIn: false
+					};         
 					 							
 	},
 	
 	//////Activate or inactive section Work state
 	activateHandle: function(bool){
 
-		this.setState({ sectWorkAct: bool })     //If it's called, get the transfered state		
+		this.setState({ sectWorkAct: bool, sectFadeIn: bool })     //If it's called, get the transfered state		
 	},
 	
 	//////Activate items
@@ -318,7 +376,7 @@ var Work = React.createClass({
 	render: function(){	
 		
 		return (
-				<section id="visualisation">
+				<section id="visualisation" data-fadein={this.state.sectFadeIn}>
 					<p className="divInfo">Visualization Work</p>
 					<section data-name="prog" data-active={this.state.sectWorkAct}>
 						<article clasName="pilgrim" data-prop="click" onClick={this.activePilgrim}>
@@ -387,13 +445,13 @@ var Contact = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectContactAct: false, data: [] };         //Section id="Contact" activate or inactivate
+			return {  sectContactAct: false, data: [],sectFadeIn: false };         //Section id="Contact" activate or inactivate
 					 							
 	},
 	
 	//////Activate or inactive section Work state
 	activateHandle: function(bool){
-		this.setState({ sectContactAct: bool })      //If it's called, get the transfered state
+		this.setState({ sectContactAct: bool, sectFadeIn: bool })      //If it's called, get the transfered state
 	},
 	
 	componentDidMount: function() {
@@ -413,9 +471,9 @@ var Contact = React.createClass({
 	render: function(){
 		
 		return (
-			<section>
+			<section data-fadein={this.state.sectFadeIn}>
 				<p className="divInfo">Contact me</p>
-				<section>
+				<section data-active={this.state.sectContactAct}>
 	  					<ValueList data={this.state.data} /><br></br>	
 				</section>	
 			</section>
@@ -428,7 +486,7 @@ var ValueList = React.createClass({
     var dataNodes = this.props.data.map(function(values) {
 	      return (		    	
 
-						<div>
+						<div className="inline">
 							<p>{values.id}</p>
 						   <figure><img src={values.image} alt=""/>
 								<figcaption>{values.contact}
@@ -439,7 +497,7 @@ var ValueList = React.createClass({
 	      );
 	 });
     return (
-		<article id="contactMe">
+		<article id="contactMe" className="myContact">
   				{dataNodes}
   		</article>
     );

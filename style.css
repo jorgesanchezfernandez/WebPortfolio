@@ -11,6 +11,7 @@ html, body {
 div {
 	min-height: 100%; 
 	position: relative;
+
 }
 
 /*
@@ -43,7 +44,7 @@ p.divInfo{
 	left: 50%;
 	height: 30%;
 	width: 50%;
-   margin: -15% 0 0 -25%;
+   margin: -18% 0 0 -25%;
    text-align: center;
    font-family: Helvetica, Arial, serif;
    font-size: 50px;
@@ -73,7 +74,15 @@ h1{
 }
 
 #contact{
-    background: url(images/contact.png) no-repeat center;
+    background: url(images/contact.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#canvas{
+    background: url(images/canvas.jpg) no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -86,7 +95,6 @@ header{
   width: 100%;
   position: fixed;
   z-index: 100;
-
 }
     
 ul{
@@ -145,6 +153,11 @@ li[data-active=false]
 {
 	background-color: rgba(0, 78, 220, 0.8);   
 	color: white;
+}
+a#aMenu{
+	text-decoration: none;
+	color: white;
+	border-style: hidden;
 }
 
 section{
@@ -228,6 +241,21 @@ div [data-name="content"]{
 	box-shadow: 10px 20px 30px black; 
 	border: 2px solid #808080;
 }
+
+article.myContact{
+		display: inline-block;
+		text-align: center;
+		border-radius: 25px;
+		padding: 12px;
+		box-shadow: 10px 20px 30px black; 
+		border: 2px solid #808080;
+		background-color: rgba(224,224,224,0.8); 
+}
+
+.clear{
+	display: block;
+}
+
 .crossButton{
 	color: white;
 	font: 15px arial, sans-serif;
@@ -247,6 +275,24 @@ textarea{
 	 color: white;
 }
 
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+section[data-fadein=true] {
+    opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration:1s;
+    -moz-animation-duration:1s;
+    animation-duration:1s;
+}
 
 
 
