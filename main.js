@@ -508,10 +508,10 @@ var ValueList = React.createClass({
 
 
 /////Render functions
-var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
-ReactDOM.render(<Nav/>,document.getElementById("menu"));
-var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
+//var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
+//ReactDOM.render(<Nav/>,document.getElementById("menu"));
+//var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
 
-var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
-var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
+//var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
+//var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
 
